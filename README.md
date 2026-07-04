@@ -1,3 +1,23 @@
+# HiLo
+
+AI-Native Hyperlocal Event Operating System
+
+Project EOS
+
+Planning • Discovery • Collaboration • Commerce
+
+Powered by
+
+Flutter
+Firebase
+OpenAI
+Google Maps
+Canva MCP
+Swiggy APIs
+WhatsApp Business
+UPI Payments
+
+
 HiLo-AI/
 
 ├── README.md
