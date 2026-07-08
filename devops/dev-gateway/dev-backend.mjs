@@ -71,7 +71,7 @@ for (const spec of specs) {
   const child = spawn(spec.cmd, spec.args, {
     cwd: spec.cwd,
     env: { ...process.env, ...spec.env },
-    shell: process.platform === 'win32',
+    shell: spec.cmd !== process.execPath && process.platform === 'win32',
   });
   child.stdout.on('data', (d) => process.stdout.write(`[${spec.name}] ${d}`));
   child.stderr.on('data', (d) => process.stderr.write(`[${spec.name}] ${d}`));
