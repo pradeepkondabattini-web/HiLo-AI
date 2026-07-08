@@ -58,17 +58,22 @@ flutter test         # runs widget tests (Firebase is stubbed)
 
 ### Run fully locally against the Firebase Emulator Suite (no billing/credentials)
 
-1. **Emulators** (repo root): `firebase emulators:start`
-2. **Backend** pointed at the emulator — in `backend-api/`, for each service set
-   `FIREBASE_PROJECT_ID=hilo-23078`, `FIREBASE_AUTH_EMULATOR_HOST=localhost:9099`,
-   `FIRESTORE_EMULATOR_HOST=localhost:8080`, then `npm run dev -w @hilo/auth-service` and
-   `npm run dev -w @hilo/event-service` (ports 8080/… — align with `API_BASE_URL`).
+1. **Emulators** (repo root): `firebase emulators:start` (Auth `:9099`, Firestore `:8080`).
+2. **Backend + dev gateway** (one command, from repo root):
+   ```bash
+   node devops/dev-gateway/dev-backend.mjs
+   ```
+   Starts auth-service (`:8081`) + event-service (`:8082`) + a local API gateway (`:8000`)
+   that routes `/api/v1/auth` and `/api/v1/events` to the right service and adds CORS for
+   the web build. (The gateway stands in for the production BFF — see
+   [devops/dev-gateway](../devops/dev-gateway/README.md).)
 3. **App** (from `flutter-app/`):
    ```bash
    flutter run -d chrome \
      --dart-define=USE_FIREBASE_EMULATOR=true \
-     --dart-define=API_BASE_URL=http://localhost:8080
+     --dart-define=API_BASE_URL=http://localhost:8000
    ```
+   Click through: welcome → sign in → onboarding → dashboard → create event.
 
 ### Run against real Firebase
 
