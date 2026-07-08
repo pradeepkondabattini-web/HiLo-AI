@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appTitle": "HiLo",
+  "@appTitle": {
+    "description": "The application name shown in the app bar and task switcher."
+  },
+  "welcomeTitle": "Welcome to HiLo",
+  "@welcomeTitle": {
+    "description": "Headline on the landing screen."
+  },
+  "welcomeSubtitle": "Your AI-native Event Operating System",
+  "@welcomeSubtitle": {
+    "description": "Sub-headline on the landing screen."
+  },
+  "getStarted": "Get started",
+  "@getStarted": {
+    "description": "Primary call-to-action button label."
+  }
+}
