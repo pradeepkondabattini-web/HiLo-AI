@@ -17,6 +17,7 @@ const PORT = Number(process.env.GATEWAY_PORT ?? 8000);
 const ROUTES = [
   { prefix: '/api/v1/auth', target: process.env.AUTH_TARGET ?? 'http://localhost:8081' },
   { prefix: '/api/v1/events', target: process.env.EVENTS_TARGET ?? 'http://localhost:8082' },
+  { prefix: '/api/v1/venues', target: process.env.VENUES_TARGET ?? 'http://localhost:8083' },
 ];
 
 function corsHeaders(req) {

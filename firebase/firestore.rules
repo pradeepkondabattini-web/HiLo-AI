@@ -111,6 +111,34 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // ─── venues/ (Sprint 2 — EOS-002-P3-Part-05) ──────────────────────────────
+    // Public catalogue: any signed-in user may read (browse/discovery). Writes are
+    // backend/admin only (venue-service via Admin SDK). Google ratings are read-only.
+    match /venues/{venueId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ─── venue_favourites/ ────────────────────────────────────────────────────
+    // A user may read their own favourites; all writes go through venue-service.
+    match /venue_favourites/{favouriteId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+
+    // ─── venue_shortlists/ · venue_votes/ ─────────────────────────────────────
+    // Event-workspace scoped (EOS-002-P3-Part-05 §16–17). Backend-managed; a user may
+    // read records they created. Membership-scoped reads are refined when these features
+    // land (they need a per-event lookup).
+    match /venue_shortlists/{shortlistId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+    match /venue_votes/{voteId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+
     // ─── DEFAULT DENY ─────────────────────────────────────────────────────────
     // Everything not explicitly granted by a more specific match is denied.
     match /{document=**} {

@@ -39,6 +39,13 @@ const specs = [
     env: { ...emulatorEnv, PORT: '8082' },
   },
   {
+    name: 'venue',
+    cmd: 'npm',
+    args: ['run', 'dev', '-w', '@hilo/venue-service'],
+    cwd: backendApi,
+    env: { ...emulatorEnv, PORT: '8083' },
+  },
+  {
     name: 'gate ',
     cmd: process.execPath,
     args: [path.join(here, 'gateway.mjs')],
@@ -47,6 +54,7 @@ const specs = [
       GATEWAY_PORT: '8000',
       AUTH_TARGET: 'http://localhost:8081',
       EVENTS_TARGET: 'http://localhost:8082',
+      VENUES_TARGET: 'http://localhost:8083',
     },
   },
 ];

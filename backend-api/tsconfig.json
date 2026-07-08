@@ -3,6 +3,7 @@
   "references": [
     { "path": "./shared" },
     { "path": "./services/auth-service" },
-    { "path": "./services/event-service" }
+    { "path": "./services/event-service" },
+    { "path": "./services/venue-service" }
   ]
 }

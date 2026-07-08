@@ -28,6 +28,24 @@
         { "fieldPath": "eventId", "order": "ASCENDING" },
         { "fieldPath": "deleted", "order": "ASCENDING" }
       ]
+    },
+    {
+      "//": "venue_favourites: listByUser — where userId== + deleted== (Sprint 2)",
+      "collectionGroup": "venue_favourites",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "deleted", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "//": "venues: listCatalogue — where deleted== + city== (Sprint 2)",
+      "collectionGroup": "venues",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "deleted", "order": "ASCENDING" },
+        { "fieldPath": "city", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
