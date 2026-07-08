@@ -1,0 +1,34 @@
+{
+  "//": "Composite index definitions (EOS-000 §43, EOS-004-P5). Every production query must be backed by an index. Sprint 1C (event-service) queries below.",
+  "indexes": [
+    {
+      "//": "events: listByMember — where deleted==false + memberIds array-contains uid, ordered by createdAt desc",
+      "collectionGroup": "events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "deleted", "order": "ASCENDING" },
+        { "fieldPath": "memberIds", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "//": "event_members: listByEvent — where eventId== + deleted==",
+      "collectionGroup": "event_members",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "eventId", "order": "ASCENDING" },
+        { "fieldPath": "deleted", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "//": "event_budgets: findByEventId — where eventId== + deleted==",
+      "collectionGroup": "event_budgets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "eventId", "order": "ASCENDING" },
+        { "fieldPath": "deleted", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

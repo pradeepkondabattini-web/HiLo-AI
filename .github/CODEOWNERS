@@ -1,0 +1,30 @@
+# CODEOWNERS — HiLo (EOS)
+# Ownership drives required PR reviews (EOS-001-P7 §12, §23).
+# Replace the placeholder owners below with real GitHub usernames or teams.
+#
+# Syntax: <path pattern>  <@owner> [<@owner> ...]
+
+# Default owner for everything not matched more specifically
+*                       @pradeep-k
+
+# Documentation, ADRs, and the Engineering Bible
+/docs/                  @pradeep-k
+/docs/adr/              @pradeep-k
+
+# Mobile (Flutter)
+/flutter-app/           @pradeep-k
+
+# Backend microservices (Cloud Run / Node.js + TypeScript)
+/backend-api/           @pradeep-k
+
+# AI Platform (Gateway, Orchestrator, Skills, MCP)
+/ai-platform/           @pradeep-k
+/skills/                @pradeep-k
+
+# Firebase config + security rules (security-sensitive — always review)
+/firebase/              @pradeep-k
+
+# Infrastructure & DevOps (security-sensitive)
+/infrastructure/        @pradeep-k
+/devops/                @pradeep-k
+/.github/               @pradeep-k

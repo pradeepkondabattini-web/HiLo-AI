@@ -1,0 +1,32 @@
+HiLo — Event Operating System (EOS)
+Copyright (c) 2026 HiLo / Project EOS. All rights reserved.
+
+PROPRIETARY AND CONFIDENTIAL
+
+This software and its associated documentation, source code, designs, and other
+materials (collectively, the "Software") are the proprietary and confidential
+property of the HiLo / Project EOS organization ("the Owner").
+
+Unless a separate written license agreement signed by the Owner grants you rights,
+you may NOT:
+
+  - copy, reproduce, or distribute the Software, in whole or in part;
+  - modify, adapt, translate, or create derivative works of the Software;
+  - publicly display, publish, sublicense, sell, rent, lease, or otherwise
+    make the Software available to any third party;
+  - reverse engineer, decompile, or disassemble the Software except to the
+    extent applicable law expressly permits despite this limitation;
+  - remove or alter any proprietary notices contained in the Software.
+
+Access to the Software is provided solely to authorized personnel and authorized
+contractors of the Owner for the purpose of developing, operating, and maintaining
+the HiLo platform, and is subject to the Owner's confidentiality obligations.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE OWNER BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For licensing inquiries, contact the Owner's Enterprise Architecture Office.
