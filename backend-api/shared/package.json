@@ -1,0 +1,27 @@
+{
+  "name": "@hilo/backend-shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared middleware, logging, errors, config, and app factory for HiLo Cloud Run services.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "express": "^4.19.0"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  },
+  "devDependencies": {
+    "express": "^4.21.0"
+  }
+}

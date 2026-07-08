@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./shared" },
+    { "path": "./services/auth-service" },
+    { "path": "./services/event-service" }
+  ]
+}
