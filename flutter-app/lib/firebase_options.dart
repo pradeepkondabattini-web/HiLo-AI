@@ -34,26 +34,25 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    appId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
+    apiKey: 'AIzaSyC88DSsNeAGDDRsPWxOQRPoo4YPu9hBrW4',
+    appId: '1:1086284360366:web:029d7956ecff03eec89b3f',
+    messagingSenderId: '1086284360366',
     projectId: 'hilo-23078',
     authDomain: 'hilo-23078.firebaseapp.com',
     storageBucket: 'hilo-23078.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    appId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
+    apiKey: 'AIzaSyCm4BNiZpX_N4R-hk9jWh0hRWKHC8XHnt4',
+    appId: '1:1086284360366:android:9294aac62e51be65c89b3f',
+    messagingSenderId: '1086284360366',
     projectId: 'hilo-23078',
     storageBucket: 'hilo-23078.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    appId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REPLACE_WITH_FLUTTERFIRE_CONFIGURE',
+    apiKey: 'AIzaSyDl6514KU67dQLJ8amBvcYhe4xHjSIR7to',
+    appId: '1:1086284360366:ios:ed3573aecdd8a441c89b3f',
+    messagingSenderId: '1086284360366',
     projectId: 'hilo-23078',
     storageBucket: 'hilo-23078.firebasestorage.app',
     iosBundleId: 'ai.hilo.hilo',

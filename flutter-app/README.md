@@ -53,14 +53,30 @@ Then:
 ```bash
 flutter pub get      # installs deps + runs gen-l10n
 flutter analyze      # static analysis (analysis_options.yaml)
-flutter test         # runs test/widget_test.dart (Firebase is stubbed)
-# Point the app at the backend (auth-service) via a compile-time define:
-flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8080   # Android emulator → host
+flutter test         # runs widget tests (Firebase is stubbed)
 ```
 
-> `flutter analyze` / `flutter test` work with the placeholder Firebase config; the app
-> only connects to Firebase after `flutterfire configure`. Run auth-service (or deploy it)
-> and set `API_BASE_URL` for the profile calls (`/bootstrap`, `/me`) to succeed.
+### Run fully locally against the Firebase Emulator Suite (no billing/credentials)
+
+1. **Emulators** (repo root): `firebase emulators:start`
+2. **Backend** pointed at the emulator — in `backend-api/`, for each service set
+   `FIREBASE_PROJECT_ID=hilo-23078`, `FIREBASE_AUTH_EMULATOR_HOST=localhost:9099`,
+   `FIRESTORE_EMULATOR_HOST=localhost:8080`, then `npm run dev -w @hilo/auth-service` and
+   `npm run dev -w @hilo/event-service` (ports 8080/… — align with `API_BASE_URL`).
+3. **App** (from `flutter-app/`):
+   ```bash
+   flutter run -d chrome \
+     --dart-define=USE_FIREBASE_EMULATOR=true \
+     --dart-define=API_BASE_URL=http://localhost:8080
+   ```
+
+### Run against real Firebase
+
+Enable Auth providers (Google/Phone/Email) in the console, run/deploy the backend with real
+Admin credentials, then `flutter run -d chrome --dart-define=API_BASE_URL=<backend-url>`.
+For Google Sign-In on **web**, add the OAuth web client id to `web/index.html`.
+
+> `flutter analyze` / `flutter test` pass without any of the above (widget tests stub Firebase).
 
 > The generated platform folders are git-ignored so this scaffold stays toolchain-free.
 > Once your team needs platform-specific config (signing, `Info.plist`, permissions),
