@@ -41,6 +41,11 @@ per [EOS-001-P7 §14](docs/) (Git Workflow & Version Control).
   (profile, language, role) → dashboard. Riverpod session (`AsyncNotifier`), GoRouter auth
   guard, Dio client to auth-service with Firebase ID-token injection. Widget test stubs
   Firebase via a fake repository.
+- **Flutter events (Sprint 1C slice):** `features/events/` — dashboard (list, empty/error
+  states, pull-to-refresh), create-event wizard (type → details → budget → guests →
+  location, 5-step `Stepper`), and event workspace shell. Talks to event-service via a
+  shared authenticated Dio (`core/network/authenticated_dio.dart`). The dashboard is the
+  authenticated home. `flutter analyze` clean; dashboard + welcome widget tests passing.
 - Deployed the validated Firestore rules + composite indexes to project `hilo-23078`
   (Firestore database in **asia-south1 / Mumbai**).
 
