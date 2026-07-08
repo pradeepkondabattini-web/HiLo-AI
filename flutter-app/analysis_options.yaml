@@ -1,0 +1,17 @@
+# Static analysis for the HiLo Flutter app (EOS-001-P6 §15).
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/l10n/app_localizations*.dart" # generated
+
+linter:
+  rules:
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_locals
+    - always_declare_return_types
+    - avoid_print # use AppLogger, never print (EOS-000 §27)
+    - sort_child_properties_last

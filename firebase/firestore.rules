@@ -1,0 +1,120 @@
+rules_version = '2';
+
+// HiLo (EOS) — Firestore Security Rules
+// Baseline: DENY BY DEFAULT (EOS-004-P6 §7, EOS-000 §69).
+// Per-collection rules are added with their domain slices:
+//   users/, roles/, sessions/  → Sprint 1B (EOS-002-P3-Part-02)
+//   events/, event_members/, event_budgets/ → Sprint 1C (EOS-002-P3-Part-04)
+// Collection access matrix: EOS-004-P6 §8. Never weaken these rules for convenience.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Reusable helpers (used by per-collection rules added later) ──────────
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    // RBAC/ownership helpers (hasRole, isOwner, …) are added when a collection's rules
+    // first need them — kept out until used to avoid dead code (EOS-001-P6 §26). Roles
+    // live in Firebase custom claims: request.auth.token.roles.
+
+    // Mandatory document metadata on create (EOS-000 §35).
+    function hasRequiredMetadataOnCreate() {
+      return request.resource.data.keys().hasAll([
+        'id', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy',
+        'status', 'version', 'deleted'
+      ])
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.deleted == false
+        && request.resource.data.version == 1;
+    }
+
+    // Optimistic versioning on update (EOS-000 §38): version increments by exactly 1,
+    // immutable fields are preserved, and updatedBy is the caller.
+    function isValidUpdate(resourceData) {
+      return request.resource.data.version == resourceData.version + 1
+        && request.resource.data.createdAt == resourceData.createdAt
+        && request.resource.data.createdBy == resourceData.createdBy
+        && request.resource.data.id == resourceData.id
+        && request.resource.data.updatedBy == uid();
+    }
+
+    // ─── users/ (Sprint 1B — EOS-002-P3-Part-02, EOS-004-P6 §8) ───────────────
+    // Self read/write only. Roles, account status, and verification flags are NOT
+    // client-writable — they are managed by auth-service via the Admin SDK (which
+    // bypasses these rules). This prevents privilege self-escalation.
+    match /users/{userId} {
+      allow read: if isSignedIn() && uid() == userId;
+
+      allow create: if isSignedIn()
+        && uid() == userId
+        && hasRequiredMetadataOnCreate()
+        && request.resource.data.roles == ['consumer'];
+
+      allow update: if isSignedIn()
+        && uid() == userId
+        && isValidUpdate(resource.data)
+        && request.resource.data.roles == resource.data.roles
+        && request.resource.data.accountStatus == resource.data.accountStatus
+        && request.resource.data.emailVerified == resource.data.emailVerified
+        && request.resource.data.phoneVerified == resource.data.phoneVerified;
+
+      // Soft delete only, performed by the backend — never a client hard delete.
+      allow delete: if false;
+    }
+
+    // ─── roles/ (role → permission master data) ───────────────────────────────
+    // Readable by any signed-in user; writable only by the backend/admin (Admin SDK).
+    match /roles/{roleId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ─── sessions/ (device/session records) ───────────────────────────────────
+    // A user may read their own sessions; writes are backend-managed (Admin SDK) to
+    // support revocation and "logout from all devices" (EOS-002-P3-Part-02 §10).
+    match /sessions/{sessionId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+
+    // ─── events/ (Sprint 1C — EOS-002-P3-Part-04, EOS-004-P6 §8) ──────────────
+    // Members may read their (non-deleted) events directly. ALL writes go through
+    // event-service via the Admin SDK (which bypasses these rules): the service enforces
+    // the lifecycle state machine, ownership/co-host rules, and validation, so direct
+    // client writes are denied (EOS-000 §30, §57 — the UI never writes Firestore directly).
+    match /events/{eventId} {
+      allow read: if isSignedIn()
+        && resource.data.memberIds is list
+        && resource.data.memberIds.hasAny([uid()])
+        && resource.data.deleted == false;
+      allow write: if false;
+    }
+
+    // ─── event_members/ ───────────────────────────────────────────────────────
+    // A user may read their own membership record; writes are backend-managed.
+    match /event_members/{memberId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+
+    // ─── event_budgets/ ───────────────────────────────────────────────────────
+    // Budgets are served through event-service (members-only, enforced there). Direct
+    // client access is denied to avoid a per-read event lookup in rules.
+    match /event_budgets/{budgetId} {
+      allow read, write: if false;
+    }
+
+    // ─── DEFAULT DENY ─────────────────────────────────────────────────────────
+    // Everything not explicitly granted by a more specific match is denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

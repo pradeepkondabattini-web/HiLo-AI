@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// HiLo (EOS) — Cloud Storage Security Rules
+// Baseline: DENY BY DEFAULT (EOS-004-P6 §15, EOS-000 §78).
+// Binary assets live in Cloud Storage; Firestore holds only metadata (EOS-000 §48, §127).
+// Downloads use signed URLs; uploads are validated for content type, extension, and size.
+// Per-path rules (profile photos, event banners, vendor galleries) are added with their
+// features. Uploaded files are never executed.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Per-path rules (profile photos, event banners, vendor galleries) are added with
+    // their features, with size/type guards, e.g.:
+    //   request.resource.size < 10 * 1024 * 1024
+    //   request.resource.contentType.matches('image/.*')
+
+    // ─── DEFAULT DENY ─────────────────────────────────────────────────────────
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

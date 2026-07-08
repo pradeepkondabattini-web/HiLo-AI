@@ -1,0 +1,22 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Telugu (`te`).
+class AppLocalizationsTe extends AppLocalizations {
+  AppLocalizationsTe([String locale = 'te']) : super(locale);
+
+  @override
+  String get appTitle => 'HiLo';
+
+  @override
+  String get welcomeTitle => 'HiLo కు స్వాగతం';
+
+  @override
+  String get welcomeSubtitle => 'మీ AI-ఆధారిత ఈవెంట్ ఆపరేటింగ్ సిస్టమ్';
+
+  @override
+  String get getStarted => 'ప్రారంభించండి';
+}

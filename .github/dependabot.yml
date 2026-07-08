@@ -1,0 +1,26 @@
+version: 2
+# Automated dependency updates (EOS-001-P7 §20). Updates are reviewed, must pass CI,
+# and must pass security scanning before merge.
+updates:
+  - package-ecosystem: npm
+    directory: /backend-api
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: pub
+    directory: /flutter-app
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore(ci)"
