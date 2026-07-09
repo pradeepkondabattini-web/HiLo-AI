@@ -29,6 +29,9 @@ export function buildVendorDeps(config: {
   const app = getFirebaseApp(config.projectId);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  // Optional domain fields may be undefined — never persist them as Firestore errors
+  // (rejects undefined values by default).
+  db.settings({ ignoreUndefinedProperties: true });
 
   const vendors = new FirestoreVendorRepository(db);
   const quotes = new FirestoreQuoteRepository(db);

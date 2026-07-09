@@ -25,6 +25,9 @@ export function buildEventDeps(projectId: string): EventRouteDeps {
   const app = getFirebaseApp(projectId);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  // Optional domain fields (startTime, description, …) may be undefined — never persist
+  // them as Firestore errors (rejects undefined values by default).
+  db.settings({ ignoreUndefinedProperties: true });
 
   const events = new FirestoreEventRepository(db);
   const members = new FirestoreEventMemberRepository(db);
