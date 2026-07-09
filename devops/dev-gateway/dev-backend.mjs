@@ -39,6 +39,13 @@ const specs = [
     env: { ...emulatorEnv, PORT: '8082' },
   },
   {
+    name: 'venue',
+    cmd: 'npm',
+    args: ['run', 'dev', '-w', '@hilo/venue-service'],
+    cwd: backendApi,
+    env: { ...emulatorEnv, PORT: '8083' },
+  },
+  {
     name: 'gate ',
     cmd: process.execPath,
     args: [path.join(here, 'gateway.mjs')],
@@ -47,6 +54,7 @@ const specs = [
       GATEWAY_PORT: '8000',
       AUTH_TARGET: 'http://localhost:8081',
       EVENTS_TARGET: 'http://localhost:8082',
+      VENUES_TARGET: 'http://localhost:8083',
     },
   },
 ];
@@ -71,7 +79,7 @@ for (const spec of specs) {
   const child = spawn(spec.cmd, spec.args, {
     cwd: spec.cwd,
     env: { ...process.env, ...spec.env },
-    shell: process.platform === 'win32',
+    shell: spec.cmd !== process.execPath && process.platform === 'win32',
   });
   child.stdout.on('data', (d) => process.stdout.write(`[${spec.name}] ${d}`));
   child.stderr.on('data', (d) => process.stderr.write(`[${spec.name}] ${d}`));

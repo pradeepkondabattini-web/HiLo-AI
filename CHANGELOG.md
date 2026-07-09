@@ -49,8 +49,23 @@ per [EOS-001-P7 §14](docs/) (Git Workflow & Version Control).
 - Deployed the validated Firestore rules + composite indexes to project `hilo-23078`
   (Firestore database in **asia-south1 / Mumbai**).
 
-_Sprint 1 (Foundation · Authentication · Event Core) — backend complete and Firestore
-rules/indexes deployed; Flutter auth UI complete (pending toolchain verification). See
+- **Venue Discovery — venue-service (Sprint 2, EOS-002-P3-Part-05):** ranked venue search
+  merging the HiLo catalogue with a provider-abstracted **Location Service** (Google Places
+  behind an adapter — fake used until Maps billing/key), a **configurable, explainable
+  ranking algorithm** (budget/capacity/distance/rating/trust/sentiment/amenities/prefs),
+  rich filters, radius (default 10 km), compare-4, and favourites. Rules + indexes for
+  `venues`/`venue_favourites`/`venue_shortlists`/`venue_votes` (deployed). ADR-010. Clean
+  Architecture; 18 unit/route tests (86 backend total).
+
+- **Flutter venues (Sprint 2 slice):** `features/venues/` — discovery (search controls,
+  radius, verified filter), ranked venue cards (distance/rating/capacity/price/**% match**),
+  favourite toggle, and venue detail (map placeholder). Reachable from the events dashboard.
+  Talks to venue-service via the shared authenticated Dio. `flutter analyze` clean; 3 widget
+  tests passing.
+
+_Sprint 1 (Foundation · Authentication · Event Core) is complete and running end-to-end
+locally; Sprint 2 (Venue Discovery) is complete — the live Google Maps/Places integration is
+deferred until Maps Platform billing + key (ADR-010). See
 [EOS-BUILD-001](docs/EOS-BUILD-001_Build_Plan.md)._
 
 [Unreleased]: https://github.com/

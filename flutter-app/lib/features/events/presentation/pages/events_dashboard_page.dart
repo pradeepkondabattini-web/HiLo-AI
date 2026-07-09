@@ -22,6 +22,11 @@ class EventsDashboardPage extends ConsumerWidget {
         title: const Text('My Events'),
         actions: <Widget>[
           IconButton(
+            tooltip: 'Find venues',
+            onPressed: () => context.push(AppRoutes.venues),
+            icon: const Icon(Icons.place_outlined),
+          ),
+          IconButton(
             tooltip: 'Sign out',
             onPressed: () => ref.read(authControllerProvider.notifier).signOut(),
             icon: const Icon(Icons.logout),

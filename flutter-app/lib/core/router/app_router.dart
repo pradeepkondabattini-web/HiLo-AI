@@ -10,6 +10,8 @@ import '../../features/authentication/presentation/pages/welcome_page.dart';
 import '../../features/events/presentation/pages/create_event_wizard_page.dart';
 import '../../features/events/presentation/pages/event_workspace_page.dart';
 import '../../features/events/presentation/pages/events_dashboard_page.dart';
+import '../../features/venues/presentation/pages/venue_detail_page.dart';
+import '../../features/venues/presentation/pages/venue_discovery_page.dart';
 
 /// Route path constants — referenced instead of raw strings.
 class AppRoutes {
@@ -21,8 +23,10 @@ class AppRoutes {
   static const String phoneSignIn = '/sign-in/phone';
   static const String onboarding = '/onboarding';
   static const String createEvent = '/events/create';
+  static const String venues = '/venues';
 
   static String eventWorkspace(String id) => '/events/$id';
+  static String venueDetail(String id) => '/venues/$id';
 }
 
 /// Application router (EOS-003-P2 §9) with an authentication guard.
@@ -77,6 +81,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'eventWorkspace',
         builder: (context, state) =>
             EventWorkspacePage(eventId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: AppRoutes.venues,
+        name: 'venues',
+        builder: (context, state) => const VenueDiscoveryPage(),
+      ),
+      GoRoute(
+        path: '/venues/:id',
+        name: 'venueDetail',
+        builder: (context, state) =>
+            VenueDetailPage(venueId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: AppRoutes.welcome,
