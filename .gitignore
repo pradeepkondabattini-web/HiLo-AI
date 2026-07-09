@@ -1,3 +1,7 @@
+# ─── Machine-local tooling (per-developer, not project artifacts) ─────────
+.mcp.json
+install.cmd
+
 # ─── Secrets & environment (NEVER commit — see SECURITY.md) ───────────────
 .env
 .env.*
