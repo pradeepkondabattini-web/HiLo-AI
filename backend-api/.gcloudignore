@@ -1,0 +1,7 @@
+# Keep Cloud Build source uploads small — dependencies are installed inside the build.
+node_modules/
+**/node_modules/
+**/dist/
+**/coverage/
+.eslintcache
+*.log
