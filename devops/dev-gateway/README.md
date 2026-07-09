@@ -24,6 +24,7 @@ Starts, all pointed at the Firebase Emulator Suite:
 | auth-service | `8081` | `/api/v1/auth/*` |
 | event-service | `8082` | `/api/v1/events/*` |
 | venue-service | `8083` | `/api/v1/venues/*` |
+| vendor-service | `8084` | `/api/v1/vendors/*` |
 | _(Firestore emulator)_ | `8080` | started separately |
 | _(Auth emulator)_ | `9099` | started separately |
 

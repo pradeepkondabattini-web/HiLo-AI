@@ -37,6 +37,9 @@ export { errorHandlerMiddleware, notFoundMiddleware } from './http/error-handler
 export { createHealthRouter } from './http/health.router.js';
 export type { ReadinessCheck, HealthRouterOptions } from './http/health.router.js';
 
+// Utilities — pure math shared by discovery services
+export { haversineKm, clamp01 } from './util/geo.js';
+
 // Auth — provider-agnostic token verification + RBAC (EOS-000 §64, §66)
 export type { TokenVerifier, VerifiedIdentity } from './auth/token-verifier.js';
 export type { AuthContext } from './auth/auth-context.js';

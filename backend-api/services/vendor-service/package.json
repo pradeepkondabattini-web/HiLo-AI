@@ -1,0 +1,21 @@
+{
+  "name": "@hilo/vendor-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HiLo Vendor Marketplace service (Cloud Run). Sprint 3: EOS-002-P3-Part-06.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hilo/backend-shared": "*",
+    "express": "^4.21.0",
+    "firebase-admin": "^12.7.0"
+  }
+}

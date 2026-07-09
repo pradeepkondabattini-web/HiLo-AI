@@ -63,9 +63,18 @@ per [EOS-001-P7 §14](docs/) (Git Workflow & Version Control).
   Talks to venue-service via the shared authenticated Dio. `flutter analyze` clean; 3 widget
   tests passing.
 
-_Sprint 1 (Foundation · Authentication · Event Core) is complete and running end-to-end
-locally; Sprint 2 (Venue Discovery) is complete — the live Google Maps/Places integration is
-deferred until Maps Platform billing + key (ADR-010). See
-[EOS-BUILD-001](docs/EOS-BUILD-001_Build_Plan.md)._
+- **Vendor Marketplace (Sprint 3, EOS-002-P3-Part-06):** `vendor-service` (consolidated —
+  ADR-011) with ranked hyperlocal search (**Vendor Intelligence Score**, configurable,
+  explainable), onboarding + 4-level verification (backend-granted), the **Smart Quotations
+  state machine** (requested → submitted ↔ negotiating → accepted/declined/expired,
+  role-gated, lazy auto-expiry), and the **HiLo Trust Score** with an admin/scheduler
+  recalculation endpoint. Rules + indexes for `vendors`/`vendor_quotes` (deployed).
+  Flutter `features/vendors`: category browse, ranked cards with verification badges,
+  vendor detail + request-quote, my-quotes with accept/decline. 20 backend tests
+  (106 total); `flutter analyze` clean, 4 widget tests passing.
+
+_Sprints 1–3 (Foundation · Auth · Events · Venue Discovery · Vendor Marketplace) are
+complete and running locally; Google Maps/Places live integration deferred until Maps
+billing + key (ADR-010). See [EOS-BUILD-001](docs/EOS-BUILD-001_Build_Plan.md)._
 
 [Unreleased]: https://github.com/
