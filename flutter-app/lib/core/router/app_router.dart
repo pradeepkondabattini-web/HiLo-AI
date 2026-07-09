@@ -10,6 +10,9 @@ import '../../features/authentication/presentation/pages/welcome_page.dart';
 import '../../features/events/presentation/pages/create_event_wizard_page.dart';
 import '../../features/events/presentation/pages/event_workspace_page.dart';
 import '../../features/events/presentation/pages/events_dashboard_page.dart';
+import '../../features/vendors/presentation/pages/my_quotes_page.dart';
+import '../../features/vendors/presentation/pages/vendor_browse_page.dart';
+import '../../features/vendors/presentation/pages/vendor_detail_page.dart';
 import '../../features/venues/presentation/pages/venue_detail_page.dart';
 import '../../features/venues/presentation/pages/venue_discovery_page.dart';
 
@@ -24,9 +27,12 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String createEvent = '/events/create';
   static const String venues = '/venues';
+  static const String vendors = '/vendors';
+  static const String myQuotes = '/vendors/quotes';
 
   static String eventWorkspace(String id) => '/events/$id';
   static String venueDetail(String id) => '/venues/$id';
+  static String vendorDetail(String id) => '/vendors/$id';
 }
 
 /// Application router (EOS-003-P2 §9) with an authentication guard.
@@ -92,6 +98,23 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'venueDetail',
         builder: (context, state) =>
             VenueDetailPage(venueId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: AppRoutes.vendors,
+        name: 'vendors',
+        builder: (context, state) => const VendorBrowsePage(),
+      ),
+      // Declared before '/vendors/:id' so "quotes" isn't captured as an id.
+      GoRoute(
+        path: AppRoutes.myQuotes,
+        name: 'myQuotes',
+        builder: (context, state) => const MyQuotesPage(),
+      ),
+      GoRoute(
+        path: '/vendors/:id',
+        name: 'vendorDetail',
+        builder: (context, state) =>
+            VendorDetailPage(vendorId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: AppRoutes.welcome,

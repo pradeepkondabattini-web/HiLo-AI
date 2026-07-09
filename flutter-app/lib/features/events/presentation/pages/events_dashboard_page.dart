@@ -27,6 +27,11 @@ class EventsDashboardPage extends ConsumerWidget {
             icon: const Icon(Icons.place_outlined),
           ),
           IconButton(
+            tooltip: 'Find vendors',
+            onPressed: () => context.push(AppRoutes.vendors),
+            icon: const Icon(Icons.storefront_outlined),
+          ),
+          IconButton(
             tooltip: 'Sign out',
             onPressed: () => ref.read(authControllerProvider.notifier).signOut(),
             icon: const Icon(Icons.logout),
