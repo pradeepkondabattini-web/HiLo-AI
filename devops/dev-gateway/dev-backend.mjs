@@ -46,6 +46,13 @@ const specs = [
     env: { ...emulatorEnv, PORT: '8083' },
   },
   {
+    name: 'vendr',
+    cmd: 'npm',
+    args: ['run', 'dev', '-w', '@hilo/vendor-service'],
+    cwd: backendApi,
+    env: { ...emulatorEnv, PORT: '8084' },
+  },
+  {
     name: 'gate ',
     cmd: process.execPath,
     args: [path.join(here, 'gateway.mjs')],
@@ -55,6 +62,7 @@ const specs = [
       AUTH_TARGET: 'http://localhost:8081',
       EVENTS_TARGET: 'http://localhost:8082',
       VENUES_TARGET: 'http://localhost:8083',
+      VENDORS_TARGET: 'http://localhost:8084',
     },
   },
 ];

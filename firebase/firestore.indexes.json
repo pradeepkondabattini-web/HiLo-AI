@@ -46,6 +46,33 @@
         { "fieldPath": "deleted", "order": "ASCENDING" },
         { "fieldPath": "city", "order": "ASCENDING" }
       ]
+    },
+    {
+      "//": "vendors: list — where deleted== + category== (Sprint 3)",
+      "collectionGroup": "vendors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "deleted", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "//": "vendor_quotes: listByRequester — where requesterUid== + deleted== (Sprint 3)",
+      "collectionGroup": "vendor_quotes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "requesterUid", "order": "ASCENDING" },
+        { "fieldPath": "deleted", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "//": "vendor_quotes: listByVendorOwner — where vendorOwnerUid== + deleted== (Sprint 3)",
+      "collectionGroup": "vendor_quotes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "vendorOwnerUid", "order": "ASCENDING" },
+        { "fieldPath": "deleted", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

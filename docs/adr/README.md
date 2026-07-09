@@ -25,6 +25,7 @@ consequences. Per [`EOS-000`](../../EOS-000_MASTER_PROJECT_CONTEXT_FOR_AI.md), a
 | [008](ADR-008-multi-role-user-schema.md) | Multi-role `users` schema (`roles[]`) | Accepted |
 | [009](ADR-009-event-writes-api-mediated.md) | API-mediated event writes | Accepted |
 | [010](ADR-010-venue-ranking-and-location-adapter.md) | Venue ranking weights + Location Service adapter | Accepted |
+| [011](ADR-011-consolidated-vendor-service.md) | Consolidated vendor-service for MVP | Accepted |
 | [009](ADR-009-event-writes-api-mediated.md) | Event writes are API-mediated (client writes denied) | Accepted |
 
 ADRs 001–006 record decisions already mandated by the Engineering Bible; they are

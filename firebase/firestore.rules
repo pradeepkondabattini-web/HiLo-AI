@@ -139,6 +139,24 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // ─── vendors/ (Sprint 3 — EOS-002-P3-Part-06) ─────────────────────────────
+    // Public marketplace catalogue: any signed-in user may read. All writes go through
+    // vendor-service via the Admin SDK (onboarding validation, verification levels, and
+    // trust scores are backend-controlled — §6, §18, §24).
+    match /vendors/{vendorId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ─── vendor_quotes/ ───────────────────────────────────────────────────────
+    // Private to the two parties: the requester and the vendor's owner. Writes are
+    // backend-managed (the quote state machine lives in vendor-service).
+    match /vendor_quotes/{quoteId} {
+      allow read: if isSignedIn()
+        && (resource.data.requesterUid == uid() || resource.data.vendorOwnerUid == uid());
+      allow write: if false;
+    }
+
     // ─── DEFAULT DENY ─────────────────────────────────────────────────────────
     // Everything not explicitly granted by a more specific match is denied.
     match /{document=**} {
