@@ -19,6 +19,9 @@ export function buildAuthDeps(projectId: string): AuthRouteDeps {
   const app = getFirebaseApp(projectId);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  // Optional domain fields (phone, city, …) may be undefined — never persist them as
+  // Firestore errors (rejects undefined values by default).
+  db.settings({ ignoreUndefinedProperties: true });
 
   const users = new FirestoreUserRepository(db);
   const roleClaims = new FirebaseRoleClaimsManager(auth);
