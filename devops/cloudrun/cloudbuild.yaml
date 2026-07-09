@@ -1,0 +1,30 @@
+# Parametrized Cloud Build pipeline: builds one HiLo microservice image from the
+# backend-api workspace (monorepo Dockerfiles expect that build context) and pushes it to
+# Artifact Registry (asia-south1).
+#
+#   gcloud builds submit backend-api \
+#     --config devops/cloudrun/cloudbuild.yaml \
+#     --substitutions=_SERVICE=auth-service
+#
+# Deployment to Cloud Run is a separate `gcloud run deploy` step (see deploy.md) so a bad
+# deploy never blocks image publication.
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - services/${_SERVICE}/Dockerfile
+      - -t
+      - ${_REGION}-docker.pkg.dev/${PROJECT_ID}/hilo/${_SERVICE}:latest
+      - .
+
+images:
+  - ${_REGION}-docker.pkg.dev/${PROJECT_ID}/hilo/${_SERVICE}:latest
+
+substitutions:
+  _SERVICE: auth-service
+  _REGION: asia-south1
+
+options:
+  logging: CLOUD_LOGGING_ONLY

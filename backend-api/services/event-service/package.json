@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@hilo/backend-shared": "*",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "firebase-admin": "^12.7.0"
   }
 }
