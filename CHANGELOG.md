@@ -57,8 +57,15 @@ per [EOS-001-P7 §14](docs/) (Git Workflow & Version Control).
   `venues`/`venue_favourites`/`venue_shortlists`/`venue_votes` (deployed). ADR-010. Clean
   Architecture; 18 unit/route tests (86 backend total).
 
+- **Flutter venues (Sprint 2 slice):** `features/venues/` — discovery (search controls,
+  radius, verified filter), ranked venue cards (distance/rating/capacity/price/**% match**),
+  favourite toggle, and venue detail (map placeholder). Reachable from the events dashboard.
+  Talks to venue-service via the shared authenticated Dio. `flutter analyze` clean; 3 widget
+  tests passing.
+
 _Sprint 1 (Foundation · Authentication · Event Core) is complete and running end-to-end
-locally; Sprint 2 (Venue Discovery) backend is in progress. See
+locally; Sprint 2 (Venue Discovery) is complete — the live Google Maps/Places integration is
+deferred until Maps Platform billing + key (ADR-010). See
 [EOS-BUILD-001](docs/EOS-BUILD-001_Build_Plan.md)._
 
 [Unreleased]: https://github.com/
