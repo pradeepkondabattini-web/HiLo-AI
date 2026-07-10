@@ -22,6 +22,11 @@ class EventsDashboardPage extends ConsumerWidget {
         title: const Text('My Events'),
         actions: <Widget>[
           IconButton(
+            tooltip: 'HiLo Assistant',
+            onPressed: () => context.push(AppRoutes.assistant),
+            icon: const Icon(Icons.auto_awesome_outlined),
+          ),
+          IconButton(
             tooltip: 'Find venues',
             onPressed: () => context.push(AppRoutes.venues),
             icon: const Icon(Icons.place_outlined),

@@ -10,6 +10,7 @@ import '../../features/authentication/presentation/pages/welcome_page.dart';
 import '../../features/events/presentation/pages/create_event_wizard_page.dart';
 import '../../features/events/presentation/pages/event_workspace_page.dart';
 import '../../features/events/presentation/pages/events_dashboard_page.dart';
+import '../../features/ai/presentation/pages/ai_chat_page.dart';
 import '../../features/vendors/presentation/pages/my_quotes_page.dart';
 import '../../features/vendors/presentation/pages/vendor_browse_page.dart';
 import '../../features/vendors/presentation/pages/vendor_detail_page.dart';
@@ -29,6 +30,7 @@ class AppRoutes {
   static const String venues = '/venues';
   static const String vendors = '/vendors';
   static const String myQuotes = '/vendors/quotes';
+  static const String assistant = '/assistant';
 
   static String eventWorkspace(String id) => '/events/$id';
   static String venueDetail(String id) => '/venues/$id';
@@ -98,6 +100,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'venueDetail',
         builder: (context, state) =>
             VenueDetailPage(venueId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: AppRoutes.assistant,
+        name: 'assistant',
+        builder: (context, state) => AiChatPage(eventId: state.uri.queryParameters['eventId']),
       ),
       GoRoute(
         path: AppRoutes.vendors,
