@@ -9,6 +9,17 @@ per [EOS-001-P7 §14](docs/) (Git Workflow & Version Control).
 ## [Unreleased]
 
 ### Added
+- **Sprint 4 — AI Platform Core** (EOS-002-P3-Part-07, Book 5): `ai-gateway-service` on
+  Cloud Run with deterministic Planning Engine (intent -> execution plan, clarification on
+  low confidence), Skill Registry (venue/vendor search, budget split, checklist, events,
+  readiness score) executing with the caller's own token, Orchestrator (skills first,
+  then LLM narration from the governed Prompt Registry), and the explanation envelope on
+  every response. LLM providers behind a port (Anthropic `claude-opus-4-8` default,
+  OpenAI secondary, deterministic fake when keyless) — ADR-012, ADR-013. Firestore
+  `prompts/`, `ai_sessions/`, `ai_usage/` with deny-by-default rules; hosting route
+  `/api/v1/ai/**`. Flutter `features/ai`: HiLo Assistant chat page (suggestions,
+  structured checklist/budget/readiness rendering, explanation footer) reachable from the
+  dashboard.
 - Monorepo scaffold: component folders per the approved layout (EOS-000 §15, EOS-BUILD-001).
 - Root governance docs: `README`, `LICENSE`, `CONTRIBUTING`, `SECURITY`, `CODEOWNERS`,
   `.gitignore`, `.editorconfig` (per EOS-001-P7 §16).

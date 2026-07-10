@@ -5,6 +5,7 @@
     { "path": "./services/auth-service" },
     { "path": "./services/event-service" },
     { "path": "./services/venue-service" },
-    { "path": "./services/vendor-service" }
+    { "path": "./services/vendor-service" },
+    { "path": "./services/ai-gateway-service" }
   ]
 }
