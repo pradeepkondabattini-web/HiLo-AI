@@ -157,6 +157,24 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // ─── AI platform (Sprint 4 — EOS-002-P3-Part-07, Book 5) ──────────────────
+    // prompts/: the governed Prompt Registry — backend-only (Admin SDK bypasses
+    // rules); clients must never read or author prompts (EOS-000 §98).
+    match /prompts/{promptId} {
+      allow read, write: if false;
+    }
+    // ai_sessions/: a user may read their own conversation history; all writes go
+    // through ai-gateway-service.
+    match /ai_sessions/{sessionId} {
+      allow read: if isSignedIn() && resource.data.userId == uid();
+      allow write: if false;
+    }
+    // ai_usage/: cost/telemetry records — backend and BigQuery only, never clients
+    // (EOS-000 §109).
+    match /ai_usage/{executionId} {
+      allow read, write: if false;
+    }
+
     // ─── DEFAULT DENY ─────────────────────────────────────────────────────────
     // Everything not explicitly granted by a more specific match is denied.
     match /{document=**} {
