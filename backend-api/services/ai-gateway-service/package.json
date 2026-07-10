@@ -1,0 +1,22 @@
+{
+  "name": "@hilo/ai-gateway-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HiLo AI Gateway service (Cloud Run). Sprint 4: Book 5 + EOS-002-P3-Part-07.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@hilo/backend-shared": "*",
+    "express": "^4.21.0",
+    "firebase-admin": "^12.7.0"
+  }
+}
